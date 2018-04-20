@@ -122,7 +122,7 @@ public class RayMoveActExecutor implements MoveActExecutor {
                 movePointList = new ArrayList<>();
                 movePointList.add(targetPoint);
             }
-//            world.printData("###############################Ray Move Mode###############################");
+            world.printData("###############################Ray Move Mode###############################");
             MrlPersonalData.VIEWER_DATA.setScaledBlockadeData(world.getSelf().getID(), obstacles, scaledConvexHull, pointsMadeForEscape, movePointList);
             moveToPoints(movePointList);
         } else {

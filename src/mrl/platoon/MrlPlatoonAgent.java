@@ -13,7 +13,6 @@ import mrl.firebrigade.MrlFireBrigade;
 import mrl.firebrigade.MrlFireBrigadeWorld;
 import mrl.helper.HumanHelper;
 import mrl.mrlPersonal.viewer.MrlViewer;
-import mrl.mrlPersonal.viewer.layers.MrlHumanLayer;
 import mrl.partition.Partition;
 import mrl.platoon.genericsearch.*;
 import mrl.police.MrlPoliceForce;
@@ -367,7 +366,6 @@ public abstract class MrlPlatoonAgent<T extends StandardEntity> extends Standard
         isWorking = false;
 
         world.setTime(time);
-        MrlHumanLayer.setTime(time);
 
         if (getID().equals(MrlViewer.CHECK_ID) || getID().equals(MrlViewer.CHECK_ID2)) {
             System.out.print(""); //todo

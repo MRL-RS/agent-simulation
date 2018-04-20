@@ -28,7 +28,6 @@ public class PartitionBasedCoordination {
 
     private ITargetSelector targetSelector;
     private TargetSelectorType targetSelectorType = TargetSelectorType.DISTANCE_BASED;
-//    private TargetSelectorType targetSelectorType = TargetSelectorType.UTILITY_BASED;
 
     public PartitionBasedCoordination(MrlWorld world, AmbulanceUtilities ambulanceUtilities, AmbulanceConditionChecker conditionChecker, VictimClassifier victimClassifier) {
         this.world = world;
@@ -58,28 +57,18 @@ public class PartitionBasedCoordination {
             case DISTANCE_BASED:
                 targetSelector = new DistanceBasedTargetSelector(world, conditionChecker, ambulanceUtilities, myPartition);
                 break;
-            case UTILITY_BASED:
-                targetSelector = new UtilityBasedTargetSelector(world, conditionChecker, ambulanceUtilities, myPartition);
-                break;
         }
 
         return targetSelector;
     }
 
 
-    boolean utilityBasedSat = false;
     public Human getNextTarget(Set<StandardEntity> goodHumans) {
         if (!(targetSelector instanceof LegacyPartitionBasedTargetSelector)) {
             ambulancePartitionManager.update();
             myPartition = ambulancePartitionManager.findHumanPartition(world.getSelfHuman());
         }
 
-        if(world.getTime()>=90 && !utilityBasedSat){
-            targetSelectorType = TargetSelectorType.UTILITY_BASED;
-            targetSelector = chooseTargetSelector();
-            utilityBasedSat = true;
-            world.printData("ATs Target selector changed to UTILITY_BASED");
-        }
         StandardEntity myTarget = targetSelector.nextTarget(goodHumans);
         if (myTarget != null) {
             return (Human) myTarget;

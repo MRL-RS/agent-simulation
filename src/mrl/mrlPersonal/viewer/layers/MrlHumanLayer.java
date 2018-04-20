@@ -4,13 +4,10 @@ package mrl.mrlPersonal.viewer.layers;
 import com.poths.rna.data.Point;
 import javolution.util.FastMap;
 import math.geom2d.conic.Circle2D;
-import mrl.MrlPersonalData;
-import mrl.ambulance.targetSelector.AmbulanceTarget;
 import mrl.common.MRLConstants;
 import mrl.common.Util;
 import mrl.mrlPersonal.viewer.StandardEntityToPaint;
 import mrl.mrlPersonal.viewer.StaticViewProperties;
-import mrl.partitioning.Partition;
 import mrl.police.clear.GuideLine;
 import rescuecore2.config.Config;
 import rescuecore2.misc.Pair;
@@ -68,8 +65,6 @@ public class MrlHumanLayer extends StandardEntityViewLayer<Human> {
     private static final Color DEAD_COLOUR = Color.YELLOW.brighter();
     public static int CLEAR_RADIUS;
     public static final int DEFAULT_CLEAR_RADIUS = 2000;
-
-    public static int TIME = 0;
 
     private static final Stroke STROKE = new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER);
     private static final Stroke STROKE_DEFAULT = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER);
@@ -133,10 +128,6 @@ public class MrlHumanLayer extends StandardEntityViewLayer<Human> {
     public static Map<EntityID, EntityID> AMBULANCE_TARGETS_TO_GO_MAP = Collections.synchronizedMap(new FastMap<EntityID, EntityID>());
     public static Map<EntityID, EntityID> FIRE_BRIGADE_TARGETS_TO_GO_MAP = Collections.synchronizedMap(new FastMap<EntityID, EntityID>());
 
-    public static Map<EntityID, Map<EntityID,AmbulanceTarget>> AMBUULANCE_TARGET_MAP= Collections.synchronizedMap(new FastMap<>());
-
-
-
     /**
      * Construct a human view layer.
      */
@@ -144,10 +135,6 @@ public class MrlHumanLayer extends StandardEntityViewLayer<Human> {
         super(Human.class);
         iconSize = DEFAULT_ICON_SIZE;
 
-    }
-
-    public static void setTime(int time) {
-        MrlHumanLayer.TIME = time;
     }
 
     @Override
@@ -1179,38 +1166,14 @@ public class MrlHumanLayer extends StandardEntityViewLayer<Human> {
         }
     }
 
-    private int printTime = 0;
     private void renderCivAction(Human human, Graphics2D g, ScreenTransform t, Pair<Integer, Integer> location) {
-
-        AmbulanceTarget ambulanceTarget=null;
-        if(AMBUULANCE_TARGET_MAP!=null && !AMBUULANCE_TARGET_MAP.isEmpty() && StaticViewProperties.selectedObject instanceof AmbulanceTeam){
-            Map<EntityID, AmbulanceTarget> ambulanceTargetMap = AMBUULANCE_TARGET_MAP.get(StaticViewProperties.selectedObject.getID());
-            if(ambulanceTargetMap!=null) {
-                ambulanceTarget = ambulanceTargetMap.get(human.getID());
-            }
-        }
-
-        if(ambulanceTarget!=null){
-            String strValue = String.valueOf(ambulanceTarget.getValue());
-            g.setColor(Color.orange);
-            drawInfo(g, t, strValue, location, -13, 15);
-            drawInfo(g, t, String.valueOf(ambulanceTarget.getEstimatedHP()), location, -13, 35);
-            drawInfo(g, t, String.valueOf(ambulanceTarget.getEstimatedDamage()), location, -13, 55);
-            if(human.getHP() < human.getStamina() && human.getBuriedness()>0) {
-                if(printTime!= TIME) {
-                    printTime = TIME;
-                    System.out.println(human.getID() + "\t" + TIME + "\t" + human.getHP() + "\t" + human.getDamage() + "\t" + ambulanceTarget.getEstimatedDamage());
-                }
-            }
-        }
-
         if (human instanceof Civilian) {
             String strID = human.getID().toString();
             String strHP = String.valueOf(human.getHP());
             String strDMG = String.valueOf(human.getDamage());
             String strBRD = String.valueOf(human.getBuriedness());
             g.setColor(Color.GREEN);
-//            drawInfo(g, t, strID, location, -13, 15);
+            drawInfo(g, t, strID, location, -13, 15);
             drawInfo(g, t, strHP, location, -16, -7);
             drawInfo(g, t, strDMG, location, 6, 5);
             drawInfo(g, t, strBRD, location, -25, 5);

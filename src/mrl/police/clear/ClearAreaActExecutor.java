@@ -143,7 +143,7 @@ public class ClearAreaActExecutor extends ClearActExecutor {
                 anyBlockadeIntersection(areasSeenInPath, clearSecureLines.second(), false);
 
         if (Util.lineLength(line2D) > clearRange) {
-//            world.printData("i have too much distance to guideline......");
+            world.printData("i have too much distance to guideline......");
 
             //todo should implement
             clearToPoint(agentPosition, line2D.getEndPoint());

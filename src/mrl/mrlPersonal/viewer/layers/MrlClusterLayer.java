@@ -263,20 +263,15 @@ public class MrlClusterLayer extends MrlAreaLayer<Building> {
         g.setStroke(STROKE_All_SEGMENTS);
 
         drawPartition(burningPartitionAndNeighbour.first(),g,t,Color.red);
-        drawPartition(burningPartitionAndNeighbour.second(), g, t, Color.black);
+        drawPartition(burningPartitionAndNeighbour.second(),g,t,Color.black);
 
     }
 
     private void renderNeighbours(Map<EntityID, Partition> allPartitionsMap, Partition partition, Graphics2D g, ScreenTransform t) {
-        if(allPartitionsMap == null || partition==null){
-            return;
-        }
         g.setStroke(STROKE);
         for (EntityID neighbourId : partition.getNeighbours()) {
             Partition neighbourPartition=allPartitionsMap.get(neighbourId);
-            if(neighbourPartition!=null) {
-                drawPartition(neighbourPartition, g, t, Color.blue);
-            }
+            drawPartition(neighbourPartition,g,t,Color.blue);
         }
     }
 
@@ -298,9 +293,7 @@ public class MrlClusterLayer extends MrlAreaLayer<Building> {
 
     private void renderNeighboursRoute(Map<EntityID, Partition> allPartitionsMap, Partition partition, Graphics2D g, ScreenTransform t) {
 
-        if(partition== null || partition.getNeighbours()==null){
-            return;
-        }
+
         for (Route route:partition.getNeighbourRoutes().values()){
 
             for (EntityID areaId:route.getRoutEntities()){

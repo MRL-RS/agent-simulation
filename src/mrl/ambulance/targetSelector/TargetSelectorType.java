@@ -8,7 +8,6 @@ package mrl.ambulance.targetSelector;
 public enum TargetSelectorType {
     LEGACY_PARTITION_BASED,
     SIMPLE_GREEDY,
-    DISTANCE_BASED,
-    UTILITY_BASED;
+    DISTANCE_BASED;
 
 }

@@ -142,7 +142,7 @@ public class GuidelineProvider {
 //                        areas.add(nextPosition);
                         guideLine.setAreas(areas);
                         guideLine.setMinor(true);
-//                        world.printData("GUIDELINE TO ENTRANCE....");
+                        world.printData("GUIDELINE TO ENTRANCE....");
 
                     }
                 }

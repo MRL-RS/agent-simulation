@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Class-Path: jfreechart-1.0.13.jar junit-4.5.jar uncommons-maths-1.2.ja
+ r xml-0.0.6.jar jaxen-1.1.1.jar kernel.jar commons-logging-1.1.1.jar
+ standard.jar traffic3.jar log4j-1.2.15.jar trove-0.1.8.jar misc.jar j
+ science-4.3.jar human.jar clear.jar RNAViewR.jar dom4j.jar jts-1.11.j
+ ar jcommon-1.0.16.jar collapse.jar ignition.jar maps.jar javolution-5
+ .5.1.jar handy.jar javaGeom-0.9.0.jar rescuecore2.jar crimson.jar sam
+ ple.jar jsi-1.0b2p1.jar gis2.jar
+Main-Class: mrl.LaunchMRL
+
